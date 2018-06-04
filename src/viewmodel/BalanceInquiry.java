@@ -1,37 +1,27 @@
 package viewmodel;
 // BalanceInquiry.java
 
-import common.Screen;
 
 // Represents a balance inquiry ATM transaction
 
 import common.Transaction;
+import interfaces.BalanceInteraction;
 
 public class BalanceInquiry extends Transaction {
 	// BalanceInquiry constructor
-	public BalanceInquiry(int userAccountNumber, Screen atmScreen) {
-		super(userAccountNumber, atmScreen);
+	private BalanceInteraction balanceInteraction;
+	
+	public BalanceInquiry(int userAccountNumber, BalanceInteraction balanceInteraction) {
+		super(userAccountNumber);
+		this.balanceInteraction = balanceInteraction;
 	} // end BalanceInquiry constructor
 
 	// performs the transaction
 	@Override
 	public void execute() {
-		// get references to bank database and screen
-		Screen screen = getScreen();
-
-		// get the available balance for the account involved
-		double availableBalance = getBankDatabase().getAvailableBalance(getAccountNumber());
-
-		// get the total balance for the account involved
-		double totalBalance = getBankDatabase().getTotalBalance(getAccountNumber());
-
-		// display the balance information on the screen
-		screen.displayMessageLine("\nBalance Information:");
-		screen.displayMessage(" - Available balance: ");
-		screen.displayDollarAmount(availableBalance);
-		screen.displayMessage("\n - Total balance:     ");
-		screen.displayDollarAmount(totalBalance);
-		screen.displayMessageLine("");
+		// get references to bank database and screen	
+		balanceInteraction.displayBalance(getBankDatabase().getAvailableBalance(getAccountNumber()), 
+				getBankDatabase().getTotalBalance(getAccountNumber()));
 	} // end method execute
 } // end class BalanceInquiry
 

@@ -5,17 +5,14 @@ package common;
 
 import interfaces.DataRepository;
 import main.ATMCaseStudy;
-import utils.Keypad;
 
 public abstract class Transaction {
 	private int accountNumber; // indicates account involved
-	private Screen screen; // ATM's screen
 	private DataRepository repository;
 
 	// Transaction constructor invoked by subclasses using super()
-	public Transaction(int userAccountNumber, Screen atmScreen) {
+	public Transaction(int userAccountNumber) {
 		accountNumber = userAccountNumber;
-		screen = atmScreen;
 		repository = ATMCaseStudy.getPersistence();
 	} // end Transaction constructor
 
@@ -23,11 +20,6 @@ public abstract class Transaction {
 	public int getAccountNumber() {
 		return accountNumber;
 	} // end method getAccountNumber
-
-	// return reference to screen
-	public Screen getScreen() {
-		return screen;
-	} // end method getScreen
 
 	// return reference to bank database
 	public DataRepository getBankDatabase() {

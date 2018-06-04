@@ -3,6 +3,7 @@ package main;
 import dao.BankDatabase;
 import interfaces.DataRepository;
 import interfaces.Menuinteraction;
+import ui.ATM;
 
 public class ATMCaseStudy {
 	private static Menuinteraction menuinteraction;

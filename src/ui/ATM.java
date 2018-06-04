@@ -1,21 +1,18 @@
-package main;
+package ui;
 
 
 import common.Screen;
 import interfaces.Menuinteraction;
+import main.ATMCaseStudy;
 import model.Deposit;
 import model.Withdrawal;
-import utils.DepositSlot;
 import utils.Keypad;
 import viewmodel.BalanceInquiry;
-import viewmodel.CashDispenser;
 
 public class ATM extends Screen implements Menuinteraction {
 	private boolean userAuthenticated; // whether user is authenticated
 	private int currentAccountNumber; // current user's account number
 	private Keypad keypad; // ATM's keypad
-	private CashDispenser cashDispenser; // ATM's cash dispenser
-	private DepositSlot depositSlot; // ATM's deposit slot
 
 	// constants corresponding to main menu options
 	private static final int BALANCE_INQUIRY = 1;
@@ -28,8 +25,6 @@ public class ATM extends Screen implements Menuinteraction {
 		userAuthenticated = false; // user is not authenticated to start
 		currentAccountNumber = 0; // no current account number to start
 		keypad = Keypad.getInstance();
-		cashDispenser = new CashDispenser(); // create cash dispenser
-		depositSlot = new DepositSlot(); // create deposit slot
 	} // end no-argument ATM constructor
 
 	// start ATM
@@ -60,13 +55,13 @@ public class ATM extends Screen implements Menuinteraction {
 			switch (displayMainMenu()) {
 			// user chose to perform one of three transaction types
 			case BALANCE_INQUIRY:
-				new BalanceInquiry(currentAccountNumber, this);
+				new BalanceInquiry(currentAccountNumber, this).execute();
 				break;
 			case WITHDRAWAL:
-				new Withdrawal(currentAccountNumber, this, cashDispenser);
+				new Withdrawal(currentAccountNumber, this).execute();
 				break;
 			case DEPOSIT:
-				new Deposit(currentAccountNumber, this);
+				new Deposit(currentAccountNumber, this).execute();
 				break;
 			case EXIT: // user chose to terminate session
 				displayMessageLine("\nExiting the system...");
@@ -108,6 +103,31 @@ public class ATM extends Screen implements Menuinteraction {
 		else
 			displayMessageLine("Invalid account number or PIN. Please try again.");
 	} // end method authenticateUser
+
+	
+	@Override
+	public void displayBalance(double available, double total) {
+		displayMessageLine("\nBalance Information:");
+		displayMessage(" - Available balance: ");
+		displayDollarAmount(available);
+		displayMessage("\n - Total balance:     ");
+		displayDollarAmount(total);
+		displayMessageLine("");
+		
+	}
+
+	@Override
+	public int displayAmount() {
+		displayMessageLine("\nWithdrawal Menu:");
+		displayMessageLine("1 - $20");
+		displayMessageLine("2 - $40");
+		displayMessageLine("3 - $60");
+		displayMessageLine("4 - $100");
+		displayMessageLine("5 - $200");
+		displayMessageLine("6 - Cancel transaction");
+		displayMessage("\nChoose a withdrawal amount: ");
+		return Keypad.getInstance().getInput(); // get user input through keypad
+	}
 
 
 } // end class ATM
