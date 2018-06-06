@@ -1,4 +1,4 @@
-package viewmodel;
+package utils;
 // CashDispenser.java
 
 // Represents the cash dispenser of the ATM
@@ -28,6 +28,12 @@ public class CashDispenser {
 		else
 			return false; // not enough bills available
 	} // end method isSufficientCashAvailable
+
+	public int getCount() {
+		return count;
+	}
+	
+	
 } // end class CashDispenser
 
 /**************************************************************************

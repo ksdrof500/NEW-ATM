@@ -1,5 +1,6 @@
 package interfaces;
 
+
 public interface DataRepository {
 	boolean authenticateUser(int userAccountNumber, int userPIN);
 	double getAvailableBalance(int userAccountNumber);

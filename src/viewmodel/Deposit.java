@@ -1,4 +1,4 @@
-package model;
+package viewmodel;
 // Deposit.java
 
 // Represents a deposit ATM transaction

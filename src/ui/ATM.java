@@ -4,10 +4,10 @@ package ui;
 import common.Screen;
 import interfaces.Menuinteraction;
 import main.ATMCaseStudy;
-import model.Deposit;
-import model.Withdrawal;
 import utils.Keypad;
 import viewmodel.BalanceInquiry;
+import viewmodel.Deposit;
+import viewmodel.Withdrawal;
 
 public class ATM extends Screen implements Menuinteraction {
 	private boolean userAuthenticated; // whether user is authenticated

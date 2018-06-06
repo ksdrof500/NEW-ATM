@@ -1,8 +1,8 @@
-package model;
+package viewmodel;
 
 import common.Transaction;
 import interfaces.WithdrawInteraction;
-import viewmodel.CashDispenser;
+import utils.CashDispenser;
 
 public class Withdrawal extends Transaction {
 	private static final int[] amounts = { 0, 20, 40, 60, 100, 200 };
